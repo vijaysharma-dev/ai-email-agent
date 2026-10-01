@@ -131,18 +131,3 @@ The goal of this project is to demonstrate how AI can be combined with workflow 
 **Vijay Sharma**
 ```
 
-### Step 10 — Save it
-
-After pasting:
-
-1. Scroll down.
-2. Click **Commit changes**.
-3. Keep **Commit directly to the `main` branch** selected.
-4. Commit message can remain:
-   `Add README`
-
-Then click **Commit changes**.
-
-After that, your GitHub project will have the **README + Word documentation + screenshots**.
-
-Send me a screenshot of the repository after the README is committed, and I'll show you the **final professional improvements** we can make.
