@@ -1,59 +1,98 @@
-Great 👍 Let's continue.
+Yes Vijay 👍 Now your repository has the **complete files**:
 
-### Step 9 — Add the README content
+- `Vijay_Sharma_AI_Email_Reply_Workflow.docx`
+- `Vijay_Sharma_AI_Email_to_Zoho_Draft_Workflow.docx`
+- `n8n-workflow.jpeg`
+- `email-draft.jpeg`
+- `email-example.jpeg`
+- `Email reply Workflow.jpg`
+- `Email reply video.mp4`
 
-If the **README editor** is open, paste this entire content:
+Your current README still contains the old **“Step 9 — Add the README content”** instructions. We should replace it completely.
+
+## Final README.md
+
+Go to **README → pencil ✏️ Edit** and **replace everything** with this:
 
 ```markdown
-# AI Email Agent
+# 🤖 AI Email Agent
 
-An AI-powered email assistant built with n8n, OpenAI and Zoho Mail.
+An AI-powered email automation workflow built with **n8n, OpenAI and Zoho Mail**.
 
-The workflow reads incoming emails, understands the sender's intent, decides whether a response is required, and creates a professional email draft for human review.
+The agent reads incoming emails, understands the sender's intent, decides whether a response is required, and creates a professional email draft for human review.
 
-## 🚀 Features
+> **Created by Vijay Sharma**
 
-- 📩 Reads incoming emails using IMAP
-- 🤖 Uses AI to understand email context
-- 🧠 Detects whether a reply is actually required
-- 🚫 Ignores information-only emails
-- ✍️ Generates concise and professional replies
-- 📝 Saves replies as email drafts
-- 👤 Keeps a human in control before sending
-- 🔐 Uses OAuth for secure API access
-- 🧵 Supports replying to the original email using the message ID
-- 🌏 Understands relative dates using Asia/Kolkata (IST)
+---
+
+## 📌 Project Overview
+
+The goal of this project is to automate repetitive email handling while keeping a **human in control of the final response**.
+
+Instead of automatically sending emails, the AI analyzes each incoming email and follows two paths:
+
+- **NO_REPLY** → No action is taken
+- **REPLY** → A draft response is created for review
+
+The final email is always reviewed and manually sent by the user.
+
+---
 
 ## 🔄 Workflow
 
 ```text
-Email Trigger (IMAP)
-        ↓
-    AI Agent
-        ↓
-       IF
-     /    \
-    /      \
-NO_REPLY   REPLY
-   ↓         ↓
- STOP    Refresh Token
-              ↓
-        Create Zoho Draft
-              ↓
-         Human Review
-              ↓
-          Manual Send
+                 Incoming Email
+                       │
+                       ▼
+              ┌─────────────────┐
+              │ Email Trigger   │
+              │     (IMAP)      │
+              └────────┬────────┘
+                       │
+                       ▼
+              ┌─────────────────┐
+              │    AI Agent     │
+              │ Understands     │
+              │ Email Intent    │
+              └────────┬────────┘
+                       │
+                       ▼
+                 ┌───────────┐
+                 │    IF     │
+                 └─────┬─────┘
+                       │
+              ┌────────┴────────┐
+              │                 │
+           NO_REPLY           REPLY
+              │                 │
+              ▼                 ▼
+             STOP         Refresh OAuth
+                                │
+                                ▼
+                         Create Email Draft
+                                │
+                                ▼
+                         Human Review
+                                │
+                                ▼
+                          Manual Send
 ```
 
-## 🧠 How the AI Decides
+---
+
+## 🧠 How the AI Works
+
+The AI analyzes the email and determines whether the sender actually expects a response.
 
 ### Information-only email
 
 Example:
 
-> FYI, the server has been restarted.
+```text
+FYI, the server has been restarted.
+```
 
-Result:
+AI result:
 
 ```text
 NO_REPLY
@@ -61,38 +100,144 @@ NO_REPLY
 
 No draft is created.
 
+---
+
 ### Email requiring a response
 
 Example:
 
-> Vijay, are you coming tomorrow?
+```text
+Vijay, are you coming tomorrow?
+```
 
-Result:
+AI result:
 
 ```text
 REPLY
-Hi, yes, I will join tomorrow.
+Hi, yes, I'll come tomorrow.
 ```
 
-The reply is saved as a draft for review.
+The response is then saved as a draft for human review.
+
+---
+
+### Another example
+
+Incoming email:
+
+```text
+Can you send me yesterday's sales report?
+```
+
+AI understands that this is a request and generates a suitable reply draft.
+
+---
+
+## ✨ Key Features
+
+- 📩 Incoming email detection using IMAP
+- 🤖 AI-powered email understanding
+- 🧠 Intent detection
+- 🚫 Ignores information-only emails
+- ✍️ Generates professional email replies
+- 📝 Saves replies as drafts
+- 👤 Human approval before sending
+- 🔐 OAuth-based API authentication
+- 🧵 Reply support using the original message ID
+- 🌏 Uses Asia/Kolkata (IST) for relative dates
+- ⚠️ Avoids inventing facts, deadlines or commitments
+- 📊 Handles large recipient lists carefully
+
+---
 
 ## 🛠️ Technologies Used
 
-- n8n
-- OpenAI
-- Zoho Mail
-- IMAP
-- OAuth 2.0
-- REST API
-- JSON
+| Technology | Purpose |
+|---|---|
+| n8n | Workflow automation |
+| OpenAI | Email understanding and reply generation |
+| Zoho Mail | Email and draft management |
+| IMAP | Incoming email trigger |
+| OAuth 2.0 | Secure API authentication |
+| REST API | Create email drafts |
+| JSON | Data exchange |
 
-## 📂 Documentation
+---
 
-### Workflow Documentation
+## 🔐 Human-in-the-Loop
 
-[AI Email Reply Workflow](./Vijay_Sharma_AI_Email_Reply_Workflow.docx)
+One important design decision in this project is:
 
-[AI Email to Zoho Draft Workflow](./Vijay_Sharma_AI_Email_to_Zoho_Draft_Workflow.docx)
+**The AI does not automatically send emails.**
+
+The workflow creates a draft instead.
+
+```text
+AI generates response
+        ↓
+Create draft
+        ↓
+Human reviews
+        ↓
+Human edits if required
+        ↓
+Human sends email
+```
+
+This reduces the risk of an AI sending an incorrect or unintended response.
+
+---
+
+## 🧩 AI Decision Rules
+
+The AI follows rules such as:
+
+### Reply when:
+
+- The sender asks a question
+- The sender asks for information
+- The sender asks for confirmation
+- The sender asks for an action
+- The sender asks whether I am available or attending
+- The sender asks for an opinion or decision
+- The sender asks me to review, approve or share something
+
+### Do not reply when:
+
+- The email is only FYI
+- Information is shared for reference
+- A report is sent without asking for anything
+- A file is shared without a request
+- An announcement does not require a response
+
+---
+
+## ⏰ Date Understanding
+
+The workflow uses:
+
+```text
+Asia/Kolkata
+IST
+UTC+05:30
+```
+
+This is used when interpreting relative dates such as:
+
+- today
+- yesterday
+- tomorrow
+- this week
+
+For example:
+
+```text
+Send me yesterday's sales report.
+```
+
+The AI understands "yesterday" using the configured timezone rather than asking an unnecessary timezone question.
+
+---
 
 ## 📸 Screenshots
 
@@ -104,17 +249,79 @@ The reply is saved as a draft for review.
 
 ![Email Draft](./email-draft.jpeg)
 
-### Example Email
+### Email Example
 
-![Example Email](./email-example.jpeg)
+![Email Example](./email-example.jpeg)
 
-## 🔐 Security
+### Reply Workflow
 
-No real credentials are included in this repository.
+![Reply Workflow](./Email%20reply%20Workflow.jpg)
 
-Client IDs, client secrets, refresh tokens, passwords and other sensitive credentials should always be stored securely and never committed to GitHub.
+---
 
-Example:
+## 🎥 Workflow Demo
+
+A video demonstration of the workflow and execution is included in this repository.
+
+**Video:**
+
+[▶️ Watch AI Email Agent Demo](./Email%20reply%20video.mp4)
+
+---
+
+## 📚 Documentation
+
+Detailed step-by-step documentation is available in the Word files below.
+
+### 1. Email Reply Workflow
+
+[📄 AI Email Reply Workflow](./Vijay_Sharma_AI_Email_Reply_Workflow.docx)
+
+This document explains:
+
+- Email Trigger
+- AI Agent
+- OpenAI Chat Model
+- AI decision logic
+- NO_REPLY / REPLY classification
+- IF node
+- Testing examples
+- Final workflow checklist
+
+### 2. Email to Draft Workflow
+
+[📄 AI Email to Zoho Draft Workflow](./Vijay_Sharma_AI_Email_to_Zoho_Draft_Workflow.docx)
+
+This document explains:
+
+- OAuth authentication
+- Access token generation
+- Zoho Mail API
+- HTTP Request nodes
+- Draft creation
+- Email recipient mapping
+- Subject and message handling
+- Reply threading
+- Testing
+- Troubleshooting
+- Security
+
+---
+
+## 🔒 Security
+
+No real credentials should be stored in this repository.
+
+Never commit:
+
+- Client Secret
+- Refresh Token
+- Password
+- API Key
+- OAuth credentials
+- App passwords
+
+Example placeholders:
 
 ```text
 Client ID      = xxxxx_CLIENT_ID
@@ -122,12 +329,53 @@ Client Secret  = xxxxx_CLIENT_SECRET
 Refresh Token  = xxxxx_REFRESH_TOKEN
 ```
 
-## 🎯 Project Goal
+All sensitive credentials should be stored securely inside the automation platform or a secure secret-management system.
 
-The goal of this project is to demonstrate how AI can be combined with workflow automation and email APIs to reduce repetitive email work while keeping humans in control of the final communication.
+---
 
-## 👨‍💻 Created By
+## 🧪 Example Flow
 
-**Vijay Sharma**
+```text
+Email received
+      ↓
+AI reads email
+      ↓
+Is a response required?
+      │
+ ┌────┴────┐
+ │         │
+NO        YES
+ │         │
+ ▼         ▼
+STOP    Generate reply
+          ↓
+       Create draft
+          ↓
+      Human review
+          ↓
+       Manual send
 ```
 
+---
+
+## 🎯 Project Objective
+
+This project demonstrates how **AI + workflow automation + email APIs** can be combined to create a practical email assistant.
+
+The focus is not only on generating text, but also on:
+
+- Understanding email intent
+- Avoiding unnecessary replies
+- Handling real-world email variations
+- Preventing invented information
+- Maintaining human approval
+- Creating drafts instead of automatically sending emails
+
+---
+
+## 👨‍💻 Author
+
+**Vijay Sharma**
+
+Built as a practical AI automation project to explore real-world AI agents, workflow automation and human-in-the-loop email processing.
+```
