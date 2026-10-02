@@ -241,6 +241,13 @@ The AI understands "yesterday" using the configured timezone rather than asking 
 
 ![Reply Workflow](./Email%20reply%20Workflow.jpg)
 
+## 📧 AI Email Reply Example
+
+![AI Email Reply Example](Email%20reply%20example.jpg)
+
+The AI generates a context-aware email reply based on the incoming message, helping automate professional email responses while 
+maintaining the original conversation context.
+
 ---
 
 ## 🎥 Workflow Demo
